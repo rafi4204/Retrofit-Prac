@@ -1,4 +1,4 @@
-package com.example.retrofittest
+package com.example.retrofittest.model
 
 class DataModel {
     var userId = 0
