@@ -44,7 +44,7 @@ class DataRepository {
                  call: Call<MutableLiveData<List<DataModel>>>,
                  response: Response<MutableLiveData<List<DataModel>>>
              ) {
-               data?.value=response.body()
+               data?.setValue(response.body())
              }
 
          })
