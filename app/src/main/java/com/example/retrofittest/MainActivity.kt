@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         vm = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-        vm?.GetData()
+
         vm?.data?.observe(this, object : Observer<List<DataModel>> {
             /**
              * Called when the data is changed.
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
 
         })
-
+        vm?.GetData()
 //        adapter = CustomAdapter(this, vm?.data?.value)
 //        recyclerView.layoutManager = LinearLayoutManager(this)
 //        recyclerView.adapter = adapter
