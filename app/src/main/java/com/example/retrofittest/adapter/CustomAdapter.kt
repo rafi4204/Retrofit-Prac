@@ -57,7 +57,7 @@ class CustomAdapter(var context:Context,var list:List<DataModel>?) : RecyclerVie
      * position.
      *
      *
-     * Note that unlike [android.widget.ListView], RecyclerView will not call this method
+     * Note that unlike [android.widget.ListView], RecyclerView will not callBack this method
      * again if the position of the item changes in the data set unless the item itself is
      * invalidated or the new position cannot be determined. For this reason, you should only
      * use the `position` parameter while acquiring the related data item inside

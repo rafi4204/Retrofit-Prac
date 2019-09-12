@@ -9,6 +9,6 @@ import retrofit2.http.POST
 
 interface ApiService {
  @GET("/posts")
- fun requestForData(): Call<MutableLiveData<List<DataModel>>>
+ fun requestForData(): Call<List<DataModel>>
 
 }
