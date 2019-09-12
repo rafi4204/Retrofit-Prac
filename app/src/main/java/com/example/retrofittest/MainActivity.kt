@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
              * @param t  The new data
              */
             override fun onChanged(t: List<DataModel>?) {
-                adapter?.notifyDataSetChanged()
                 adapter = CustomAdapter(this@MainActivity,t)
                 recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
                 recyclerView.adapter = adapter

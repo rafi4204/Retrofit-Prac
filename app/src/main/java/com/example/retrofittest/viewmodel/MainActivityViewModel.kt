@@ -8,11 +8,11 @@ import com.example.retrofittest.repository.DataRepository
 
 class MainActivityViewModel : ViewModel() ,CallBack{
     override fun SendData(vm: List<DataModel>) {
-             data?.value=vm
+             data.value=vm
     }
 
 
-    var data: MutableLiveData<List<DataModel>>? = null
+    var data = MutableLiveData<List<DataModel>>()
     var repo: DataRepository? = null
 
     var call: CallBack? = null
