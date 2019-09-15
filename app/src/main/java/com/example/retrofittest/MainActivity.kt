@@ -15,10 +15,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.retrofittest.adapter.CustomAdapter
+import com.example.retrofittest.base.BaseFragmentClass
 import com.example.retrofittest.listener.AdapterListener
 import com.example.retrofittest.model.DataModel
 import com.example.retrofittest.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.net.Uri
+
 
 class MainActivity : AppCompatActivity(),AdapterListener {
 
@@ -80,6 +86,13 @@ class MainActivity : AppCompatActivity(),AdapterListener {
     }
     override fun listener(pos: Int) {
        Toast.makeText(this,"this is listner!!!!!!!!!!!!!!!!!!!!!!",Toast.LENGTH_SHORT).show()
+
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.frameLayout, BlankFragment())
+        fragmentTransaction.commit()
     }
+
+
 
 }
