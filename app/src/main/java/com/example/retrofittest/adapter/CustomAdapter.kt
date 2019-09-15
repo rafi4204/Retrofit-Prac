@@ -8,10 +8,12 @@ import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofittest.R
+import com.example.retrofittest.listener.AdapterListener
 import com.example.retrofittest.model.DataModel
 import kotlin.properties.Delegates
 
 class CustomAdapter(var context:Context,var list:List<DataModel>?) : RecyclerView.Adapter<CustomViewHolder>() {
+   var Alistener:AdapterListener?=null
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -77,6 +79,10 @@ class CustomAdapter(var context:Context,var list:List<DataModel>?) : RecyclerVie
         holder.userId.text=list?.get(position)?.userId .toString()
         holder.body.text=list?.get(position)?.body
         holder.title.text=list?.get(position)?.title
+
+        holder.body.setOnClickListener {
+            Alistener?.listener(position)
+        }
     }
 }
 
