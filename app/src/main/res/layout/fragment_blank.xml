@@ -1,18 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".BlankFragment">
 
+
+
    <androidx.appcompat.widget.AppCompatTextView
+       android:id="@+id/userId"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:gravity="center"
-       android:textSize="20dp"
-       android:textColor="@android:color/holo_red_dark"
-       android:text="HOLA!!!!!!!!"
-       />
+       android:layout_height="wrap_content"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.120000005" />
 
 
-</LinearLayout>
+
+   <androidx.appcompat.widget.AppCompatTextView
+       android:id="@+id/Id"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.52"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/userId"
+       app:layout_constraintVertical_bias="0.18" />
+
+   <androidx.appcompat.widget.AppCompatTextView
+       android:id="@+id/title"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/Id"
+       app:layout_constraintVertical_bias="0.223" />
+
+   <androidx.appcompat.widget.AppCompatTextView
+       android:id="@+id/body"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/title"
+       app:layout_constraintVertical_bias="0.427" />
+</androidx.constraintlayout.widget.ConstraintLayout>

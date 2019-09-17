@@ -15,12 +15,14 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.retrofittest.adapter.CustomAdapter
 import com.example.retrofittest.listener.AdapterListener
 import com.example.retrofittest.model.DataModel
+import com.example.retrofittest.utils.AppHelper
 import com.example.retrofittest.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
 
@@ -74,7 +76,7 @@ class ListFragment : Fragment() {
             builder?.build()?.let { this?.notify(1, it) }
         }
         vm = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-
+        vm?.GetData()
         vm?.data?.observe(this, object : Observer<List<DataModel>> {
             /**
              * Called when the data is changed.
@@ -84,36 +86,44 @@ class ListFragment : Fragment() {
                 adapter = context?.let { CustomAdapter(it, t) }
                 recyclerView.layoutManager = LinearLayoutManager(context)
                 recyclerView.adapter = adapter
+                adapter?.Alistener = object : AdapterListener {
+                    override fun listener(pos: Int) {
+                        Toast.makeText(
+                            context,
+                            "this is listner!!!!!!!!!!!!!!!!!!!!!!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
 
+                        val newFragment = BlankFragment()
+
+                        var args = Bundle()
+                        args = bundleOf(
+                            AppHelper.ID to t?.get(pos)?.id,
+                            AppHelper.TITLE to t?.get(pos)?.title,
+                            AppHelper.BODY to t?.get(pos)?.body,
+                            AppHelper.USERID to t?.get(pos)?.userId
+                        )
+                        newFragment.arguments = args
+                        val transaction =
+                            activity?.supportFragmentManager?.beginTransaction()?.apply {
+                                // Replace whatever is in the fragment_container view with this fragment,
+                                // and add the transaction to the back stack so the user can navigate back
+                                replace(R.id.frameLayout, newFragment)
+                                addToBackStack(null)
+                            }
+
+// Commit the transaction
+                        transaction?.commit()
+                    }
+                }
 
             }
 
 
         })
-        vm?.GetData()
+//        vm?.GetData()
 
-
-        adapter?.Alistener = object : AdapterListener {
-            override fun listener(pos: Int) {
-                Toast.makeText(context, "this is listner!!!!!!!!!!!!!!!!!!!!!!", Toast.LENGTH_SHORT)
-                    .show()
-
-                val newFragment = BlankFragment()
-                /* Bundle args = Bundle()
-                 args.putInt(ArticleFragment.ARG_POSITION, position)
-                 newFragment.arguments = args*/
-
-                val transaction = activity?.supportFragmentManager?.beginTransaction()?.apply {
-                    // Replace whatever is in the fragment_container view with this fragment,
-                    // and add the transaction to the back stack so the user can navigate back
-                    replace(R.id.frameLayout, newFragment)
-                    addToBackStack(null)
-                }
-
-// Commit the transaction
-                transaction?.commit()
-            }
-        }
 
     }
 }

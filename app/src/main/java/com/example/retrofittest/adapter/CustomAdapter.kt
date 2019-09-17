@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofittest.R
 import com.example.retrofittest.listener.AdapterListener
@@ -93,7 +92,7 @@ class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var title : TextView by Delegates.notNull()
     var userId : TextView by Delegates.notNull()
     init {
-        id=itemView.findViewById(R.id.id)
+        id=itemView.findViewById(R.id.userId)
         body=itemView.findViewById(R.id.body)
         title=itemView.findViewById(R.id.title)
         userId=itemView.findViewById(R.id.userId)
