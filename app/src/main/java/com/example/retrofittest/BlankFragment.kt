@@ -7,13 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.retrofittest.base.BaseFragmentClass
 import com.example.retrofittest.utils.AppHelper
 import kotlinx.android.synthetic.main.fragment_blank.*
 
 
 
 
-class BlankFragment : Fragment() {
+class BlankFragment : BaseFragmentClass() {
 
 
     override fun onCreateView(
@@ -29,6 +30,7 @@ class BlankFragment : Fragment() {
         body.text= arguments?.getString(AppHelper.BODY,"")
         Id.text=arguments?.getInt(AppHelper.ID,-1).toString()
         title.text=arguments?.getString(AppHelper.TITLE,"")
+        setNotifuication(arguments!!.getString(AppHelper.TITLE,""), arguments!!.getString(AppHelper.BODY,""),"BlankFragmentClass")
 
     }
 
