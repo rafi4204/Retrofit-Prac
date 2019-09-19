@@ -1,16 +1,16 @@
 package com.example.retrofittest.base
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.example.retrofittest.BlankFragment
+import com.example.retrofittest.MainActivity
 import com.example.retrofittest.R
 
 open class BaseFragmentClass : Fragment(), FragmentInterface {
@@ -38,7 +38,12 @@ open class BaseFragmentClass : Fragment(), FragmentInterface {
     }
 
 
-    override fun setNotifuication(title: String, body: String, intent: String) {
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+    override fun setNotifuication(
+        title: String,
+        body: String,
+        activity: Class<out AppCompatActivity>
+    ) {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -56,11 +61,14 @@ open class BaseFragmentClass : Fragment(), FragmentInterface {
         }
 
         //intent
-        var blank = intent
-        val intent = Intent(context, blank::class.java).apply {
-            flags =  Intent.FLAG_ACTIVITY_CLEAR_TASK
+        val resultIntent = Intent(context, activity)
+// Create the TaskStackBuilder
+        val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(context).run {
+            // Add the intent, which inflates the back stack
+            addNextIntentWithParentStack(resultIntent)
+            // Get the PendingIntent containing the entire back stack
+            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
 
 
         val builder = context?.let {
@@ -70,7 +78,7 @@ open class BaseFragmentClass : Fragment(), FragmentInterface {
                 .setContentText(body)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 // Set the intent that will fire when the user taps the notification
-                .setContentIntent(pendingIntent)
+                .setContentIntent(resultPendingIntent)
                 .setAutoCancel(true)
         }
 

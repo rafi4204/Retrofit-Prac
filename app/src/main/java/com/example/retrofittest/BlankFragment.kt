@@ -1,7 +1,9 @@
 package com.example.retrofittest
 
+import android.app.Activity
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -30,7 +32,9 @@ class BlankFragment : BaseFragmentClass() {
         body.text= arguments?.getString(AppHelper.BODY,"")
         Id.text=arguments?.getInt(AppHelper.ID,-1).toString()
         title.text=arguments?.getString(AppHelper.TITLE,"")
-        setNotifuication(arguments!!.getString(AppHelper.TITLE,""), arguments!!.getString(AppHelper.BODY,""),"BlankFragmentClass")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            setNotifuication(arguments!!.getString(AppHelper.TITLE,""), arguments!!.getString(AppHelper.BODY,""),MainActivity::class.java)
+        }
 
     }
 
