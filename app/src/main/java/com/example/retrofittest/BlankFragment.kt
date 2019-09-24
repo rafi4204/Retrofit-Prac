@@ -12,6 +12,9 @@ import android.view.ViewGroup
 import com.example.retrofittest.base.BaseFragmentClass
 import com.example.retrofittest.utils.AppHelper
 import kotlinx.android.synthetic.main.fragment_blank.*
+import android.content.Intent
+
+
 
 
 
@@ -35,6 +38,8 @@ class BlankFragment : BaseFragmentClass() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             setNotifuication(arguments!!.getString(AppHelper.TITLE,""), arguments!!.getString(AppHelper.BODY,""),MainActivity::class.java)
         }
+        val intent = Intent(activity, MapActivity::class.java)
+        startActivity(intent)
 
     }
 
